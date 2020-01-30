@@ -1,9 +1,4 @@
-// var firstName = require("./utils.js")
-
-// const sum = firstName(4, -2)
-
-
-// console.log(sum)
+const validator = require("validator")
 
 var notes = require("./notes.js")
 
