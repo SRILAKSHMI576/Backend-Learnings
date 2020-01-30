@@ -1,3 +1,6 @@
 var firstName = require("./utils.js")
 
-console.log(firstName)
+const sum = firstName(4, -2)
+
+
+console.log(sum)
