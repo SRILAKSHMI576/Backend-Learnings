@@ -1,4 +1,5 @@
 const validator = require("validator")
+const chalk = require("chalk")
 
 var notes = require("./notes.js")
 
@@ -14,3 +15,7 @@ console.log(validator.isEmail("hello.com"))
 //it return true if string is only url other wise its false
 console.log(validator.isURL("hello"))
 console.log(validator.isURL("hello.com"))
+
+//use chalk
+console.log(chalk.blue('Hello') + ' World' + chalk.red('!'));
+console.log(chalk.black("sri"))
