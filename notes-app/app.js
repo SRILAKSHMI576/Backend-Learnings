@@ -1,5 +1,3 @@
-const fs = require("fs"); //importing node modules
+var firstName = require("./utils.js")
 
-// fs.writeFileSync("notes.txt", "This file was created by Node.js")
-
-fs.appendFileSync("notes.txt", " Srilakshmi")
+console.log(firstName)
