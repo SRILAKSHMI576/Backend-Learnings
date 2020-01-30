@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs"); //importing node modules
 
 // fs.writeFileSync("notes.txt", "This file was created by Node.js")
 
