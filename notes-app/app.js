@@ -1,11 +1,14 @@
 const validator = require("validator")
+const yargs = require("yargs")
 const chalk = require("chalk")
 
-const command = process.argv[2]
 
-if (command === "add") {
-	console.log("notes added!")
-} else if (command === "remove") {
-	console.log("notes removed!")
-}
+yargs.command({
+	command: "add",
+	describe: "Add a new note",
+	handler: function () {
+		console.log("Adding a new movie")
+	}
+})
 
+console.log(yargs.argv)
