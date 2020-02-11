@@ -5,6 +5,6 @@ function getData() {
 	fetch(url)
 	.then(res => res.json())
 	.then(json => console.log(json.features[0].text));
-
+	
 }
 getData()
