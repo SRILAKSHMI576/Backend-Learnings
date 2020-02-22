@@ -15,12 +15,12 @@ function getAll(){
 // getAll()
 
 //Search By Index
-function findByIndex(num){
+function findByIndex(serial_number){
 	axios.get(url)
 	.then(res => {
 		n = res.data.length - 1
 		for(index=0; index<=n; index++){
-			if(res.data[index].capsule_serial === num){
+			if(res.data[index].capsule_serial === serial_number){
 				console.log(res.data[index])
 			}
 		}
