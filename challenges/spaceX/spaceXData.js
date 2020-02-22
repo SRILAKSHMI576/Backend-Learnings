@@ -15,29 +15,40 @@ function getAll(){
 // getAll()
 
 //Search By Index
-function findByIndex(index){
-		axios.get(url)
+function findByIndex(num){
+	axios.get(url)
 	.then(res => {
-		console.log("res",res.data[index])
+		n = res.data.length - 1
+		for(index=0; index<=n; index++){
+			if(res.data[index].capsule_serial === num){
+				console.log(res.data[index])
+			}
+		}
+		
 	})
 	.catch(err => {
 		console.log("Err",err)
 	})
-	}
-// findByIndex(1)
-// findByIndex(3)
-// findByIndex(10)
+}	
+findByIndex("C101")
+findByIndex("C105")
+findByIndex("C112")
 
-//Search Based on Missions
-function findByMissions(index){
-	axios.get(url)
-.then(res => {
-	console.log(res.data[index].missions)
-})
-.catch(err => {
-	console.log("Err",err)
-})
-}
-findByMissions(1)
-findByMissions(3)
-findByMissions(10)
+// console.log("helloo", res.data[index].capsule_serial === num)
+// 		console.log("bye", res.data[index])	
+// //Search Based on Missions
+// function findByMissions(index){
+// 	axios.get(url)
+// .then(res => {
+// 	console.log(res.data[index].missions)
+// })
+// .catch(err => {
+// 	console.log("Err",err)
+// })
+// }
+// findByMissions(1)
+// findByMissions(3)
+// findByMissions(10)
+
+//retuns based on Range
+
