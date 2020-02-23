@@ -51,9 +51,20 @@ function findByIndex(serial_number){
 		console.log("Err",err)
 	})
 }	
-findByIndex("COTS 1")
-findByIndex("CRS-4")
-findByIndex("CRS-11")
+// findByIndex("COTS 1")
+// findByIndex("CRS-4")
+// findByIndex("CRS-11")
+
 
 //retuns based on Range
-
+function findDataBasedOnRange(num, num1){
+	axios.get(url)
+	.then(res => {
+		const result = res.data.slice(num, num1)
+			console.log(result)	
+	 })
+	 .catch(err => {
+		 console.log(err)
+	 })
+}
+findDataBasedOnRange(4, 8)
