@@ -68,3 +68,4 @@ function findDataBasedOnRange(num, num1){
 	 })
 }
 findDataBasedOnRange(4, 8)
+findDataBasedOnRange(0,4)
