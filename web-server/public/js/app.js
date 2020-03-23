@@ -1,1 +1,0 @@
-console.log("Clinent side js is loaded")

@@ -1,4 +1,5 @@
-const validator = require("validator")
-const yargs = require("yargs")
-const chalk = require("chalk")
-const notes = require("./notes.js")
+const fs = require('fs')
+
+fs.writeFileSync("notes.txt", "Welcome to nodejs course.")
+
+fs.appendFileSync("notes.txt", " i am srilakshmi")
