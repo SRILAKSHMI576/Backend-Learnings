@@ -3,6 +3,7 @@ const add = require("./utils")
 const notes = require("./notes")
 const validator = require('validator')
 const chalk = require('chalk')
+const yargs =  require("yargs")
 
 fs.writeFileSync("notes.txt", "Welcome to nodejs course.")
 
@@ -35,7 +36,47 @@ console.log(process.argv) // give array
 const command = process.argv[2]
 
 if(command === 'add'){
-	console.log("Adding notes")
+	// console.log("Adding notes")
 }else if(command === 'remove'){
-	console.log("Removing notes")
+	// console.log("Removing notes")
 }
+
+// working with yargs
+
+//add command
+yargs.command({
+	command: 'add',
+	describe: 'Add a new note',
+	handler: function(){
+		console.log("Adding a new note")
+	}
+})
+
+//remove command
+yargs.command({
+	command: "remove",
+	describe: "Remove a new note",
+	handler: function(){
+		console.log("Remove a new note")
+	}
+})
+
+//list command
+yargs.command({
+	command: "list",
+	describe: "Add a new list",
+	handler: function(){
+		console.log("Adding a new list")
+	}
+})
+
+//Read commmand
+yargs.command({
+	command: "read",
+	describe: "Read a file",
+	handler: function(){
+		console.log("Reading a new file")
+	}
+})
+
+console.log(yargs.argv)
