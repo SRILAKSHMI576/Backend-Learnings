@@ -10,11 +10,11 @@ const connectionURL = "mongodb://127.0.0.1:27017"
 const databaseName = "task-manager"
 
 const id = new ObjectId()
-console.log(id) // show id
-console.log(id.getTimestamp()) // show id time
-console.log(id.id) // show id in buffer
-console.log(id.id.length) // show id length
-console.log(id.toHexString().length)
+// console.log(id) // show id
+// console.log(id.getTimestamp()) // show id time
+// console.log(id.id) // show id in buffer
+// console.log(id.id.length) // show id length
+// console.log(id.toHexString().length)
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
 	if(error) {
@@ -69,11 +69,37 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
 	// })
 
 	/////////////////////----------------GET DATA----------
-	db.collection('user').findOne({ name: "srini", age: 89}, (error, user) => {
-		if(error){
-			return console.log("Unable to fetch")
-		}
+	// find user by data
+	// db.collection('user').findOne({ name: "srini" }, (error, user) => {
+	// 	if(error){
+	// 		return console.log("Unable to fetch")
+	// 	}
 
-		console.log("---------",user)
+	// 	console.log("---------",user)
+	// })
+
+	//find user by unique id
+	// db.collection('user').findOne({ _id: new ObjectId("5e7b0bab1f862d260d2df1cc") }, (error, user) => {
+	// 	if(error){
+	// 		return console.log("Unable to fetch")
+	// 	}
+
+	// 	console.log("---------",user)
+	// })
+
+	// db.collection('user').find({ age: 23 }).toArray((error, user) => {
+	// 	console.log("user",user)
+	// })
+
+	// db.collection('user').find({ age: 23 }).count((error, user) => {
+	// 	console.log("user",user)
+	// })
+
+	db.collection('tasks').findOne({_id: new ObjectId("5e7b0d3daf00c12701f075dc") }, (error, tasks) => {
+		console.log(tasks)
 	})
+
+	// db.collection('tasks').find({ completed: false }).toArray((error, task) => {
+	// 	console.log(task)
+	// })
 })
