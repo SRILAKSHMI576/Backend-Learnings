@@ -128,16 +128,32 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
 	// 	console.log(error)
 	// })
 
-	db.collection('tasks').updateMany({
-		completed: true
-	}, {
-		$set:{
-			completed: false
-		}
-	}).then((result) => {
-		console.log(result.modifiedCount)
-	}).catch((error) => {
-		console.log(error)
-	})
+	// db.collection('tasks').updateMany({
+	// 	completed: true
+	// }, {
+	// 	$set:{
+	// 		completed: false
+	// 	}
+	// }).then((result) => {
+	// 	console.log(result.modifiedCount)
+	// }).catch((error) => {
+	// 	console.log(error)
+	// })
 
+	///////////////----------------Delete documents-------------
+	// db.collection('user').deleteMany({
+	// 	age: 23
+	// }).then((result) => {
+	// 	console.log(result.deletedCount)
+	// }).catch((error) => {
+	// 	console.log(error)
+	// })
+
+	db.collection('tasks').deleteOne({
+		description : "Hello world"
+	}).then(() => {
+		console.log("Success")
+	}).catch(() => {
+		console.log("Failed")
+	})
 })
