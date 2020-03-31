@@ -26,6 +26,17 @@ const User = mongoose.model('User', {
 			}
 		}
 	},
+	password: {
+		type: String,
+		required: true,
+		minlength: 7,
+		trim: true,
+		validate(value){
+			if(value.toLowerCase().includes('password')){
+				throw new Error("Password invalid")
+			}
+		}
+	},
 	age: {
 		type: Number,
 		default: 0,
@@ -38,34 +49,38 @@ const User = mongoose.model('User', {
 })
 
 //save data to db
-const me = new User({
-	name: "    Laddu   ",
-	email: 'sri@gmail.com   '
-})
+// const me = new User({
+// 	name: "    Laddu   ",
+// 	email: 'sri@gmail.com   ',
+// 	password: "          abdchdfuishfejfjdsjb           "
+// })
 
-me.save().then(() => {
-	console.log(me)
-}).catch((error) => {
-	console.log("Error!", error)
-})
+// me.save().then(() => {
+// 	console.log(me)
+// }).catch((error) => {
+// 	console.log("Error!", error)
+// })
 
 //create another mondel
 const Task = mongoose.model('Task', {
 	description: {
-		type: String
+		type: String,
+		required: true,
+		trim: true
 	},
 	completed: {
-		type: Boolean
+		type: Boolean,
+		default: false
 	}
 })
 
-// const task = new Task({
-// 	description: "HELOOOOO WORLDDDDDD",
-// 	completed: false
-// })
+const task = new Task({
+	description: "             HELOOOOO WORLDDDDDD           ",
+	completed: false
+})
 
-// task.save().then(() => {
-// 	console.log(task)
-// }).catch((error) => {
-// 	console.log(error)
-// })
+task.save().then(() => {
+	console.log(task)
+}).catch((error) => {
+	console.log(error)
+})
