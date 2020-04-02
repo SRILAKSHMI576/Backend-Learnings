@@ -108,6 +108,24 @@ app.patch("/users/:id", async(req, res) => {
 	}
 })
 
+//Delete user
+app.delete("/users/:id", async(req, res) => {
+	const _id = req.params.id
+
+	try {
+		const user = await User.findByIdAndDelete(_id)
+
+		if(!user){
+			return res.status(404).send()
+		}
+
+		res.send(user)
+	} catch (e) {
+		res.status(404).send(e)
+	}
+})
+
+
 //Read tasks
 // app.get("/tasks", (req, res) => {
 // 	Task.find({}).then((tasks) => {
@@ -196,6 +214,23 @@ app.patch("/tasks/:id", async(req, res) => {
 
 	} catch (e) {
 		res.status(400).send(e)
+	}
+})
+
+//Delete task
+app.delete("/tasks/:id", async(req, res) => {
+	const _id = req.params.id
+
+	try {
+		const task = await Task.findByIdAndDelete(_id)
+
+		if(!task){
+			return res.status(404).send()
+		}
+		
+		res.send(task)
+	} catch (e) {
+		res.status(404).send(e)
 	}
 })
 
