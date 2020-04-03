@@ -69,8 +69,20 @@ router.post("/users", async (req, res) => {
 		await user.save()
 			res.status(201).send(user)
 		} catch(e) {
-			console.log(e)
+			res.status(400).send()
 		}
+})
+
+//Login with user
+router.post("/users/login", async(req, res) => {
+	try {
+		const user = await User.findByCredentials(req.body.email, req.body.password)
+		console.log("user", user)
+		res.send(user)
+
+	} catch (e) {
+		console.log(e)
+	}
 })
 
 //Update user
@@ -94,7 +106,7 @@ router.patch("/users/:id", async(req, res) => {
 		console.log("user",user)
 
 		updates.forEach((update) => user[update] = req.body[update])
-		
+
 		await user.save()
 		// const user = await User.findByIdAndUpdate(_id, body, { new: true, runValidators: true })
 		
