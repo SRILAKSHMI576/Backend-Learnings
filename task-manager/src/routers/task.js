@@ -17,7 +17,7 @@ router.get("/tasks", async (req, res) => {
 		const task = await Task.find({})
 		res.send(task)
 	} catch (e) {
-		res.status(200).send(e)
+		res.status(500).send(e)
 	}
 })
 
@@ -40,9 +40,14 @@ router.get("/tasks/:id", async (req, res) => {
 
 	try {
 		const task = await Task.findById(_id)
+
+		if(!task) {
+			return res.status(404).send()
+		}
+
 		res.send(task)
 	}catch (e) {
-		res.send(e)
+		res.status(500).send()
 	}
 })
 
@@ -64,14 +69,14 @@ router.post("/tasks", async (req, res) => {
 		await task.save()
 			res.status(201).send(task)
 		} catch(e) {
-			console.log(e)
+			res.status(400).send(e)
 		}
 })
 
 //Update task
 router.patch("/tasks/:id", async(req, res) => {
-	const _id = req.params.id
-	const task = req.body
+	// const _id = req.params.id
+	// const task = req.body
 
 	const updates = Object.keys(req.body)
 	const allowedUpdates = ["description","completed"]
@@ -80,14 +85,21 @@ router.patch("/tasks/:id", async(req, res) => {
 	if(!isValidOperation){
 		return res.status(400).send({error: "Invalid updates"})
 	}
+	
 	try {
-		const updateTask = await Task.findByIdAndUpdate(_id, task, {new : true, runValidators: true})
 
-		if(!updateTask){
+		const task = await Task.findById(req.params.id)
+	
+		updates.forEach((update) => task[update] = req.body[update])
+		await task.save()
+
+		// const updateTask = await Task.findByIdAndUpdate(_id, task, {new : true, runValidators: true})
+
+		if(!task){
 			return res.status(404).send()
 		}
 
-		res.send(updateTask)
+		res.send(task)
 
 	} catch (e) {
 		res.status(400).send(e)

@@ -1,7 +1,7 @@
 //create task model
 const mongoose = require("mongoose")
 
-const Task = mongoose.model('Task', {
+const Task = mongoose.model('Task',{
 	description: {
 		type: String,
 		required: true,
