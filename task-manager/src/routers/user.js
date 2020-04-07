@@ -12,14 +12,19 @@ const router = new express.Router()
 // 	})
 // })
 
-router.get("/users", auth, async (req, res) => {
-	try{
-		const users = await User.find({})
-		res.status(200).send(users)
-	} catch (e) {
-		res.status(404).send(e)
-	}
+// router.get("/users", auth, async (req, res) => {
+// 	try{
+// 		const users = await User.find({})
+// 		res.status(200).send(users)
+// 	} catch (e) {
+// 		res.status(404).send(e)
+// 	}
+// })
+
+router.get("/users/me", auth, async (req, res) => {
+	res.send(req.user)
 })
+
 
 //Read user
 // app.get("/user/:id", (req, res) => {
