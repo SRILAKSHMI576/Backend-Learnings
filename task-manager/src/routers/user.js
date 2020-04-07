@@ -41,21 +41,22 @@ router.get("/users/me", auth, async (req, res) => {
 // 	})
 // })
 
-router.get("/user/:id", async (req, res) => {
-	const _id = req.params.id
+// router.get("/user/:id", async (req, res) => {
+// 	const _id = req.params.id
 
-	try{
-		const user = await User.findById(_id)
+// 	try{
+// 		const user = await User.findById(_id)
 
-		if(!user) {
-			return res.status(404).send()
-		}
+// 		if(!user) {
+// 			return res.status(404).send()
+// 		}
 
-		res.send(user)
-	} catch (e) {
-		res.status(500).send()
-	}
-})
+// 		res.send(user)
+// 	} catch (e) {
+// 		res.status(500).send()
+// 	}
+// })
+
 //create user data
 // app.post('/users', (req, res) => {
 // 	const user = new User(req.body)
@@ -122,53 +123,83 @@ router.post("/users/logout", auth, async (req, res) => {
  })
 
 //Update user
-router.patch("/users/:id", async(req, res) => {
-	const _id = req.params.id
-	const body = req.body
+// router.patch("/users/:id", async(req, res) => {
+// 	const _id = req.params.id
+// 	const body = req.body
 
+// 	const updates = Object.keys(req.body)
+// 	console.log("updates", updates)
+// 	const allowedUpdates = ['name', 'email', 'password', 'age']
+// 	console.log("allwoowdd", allowedUpdates)
+// 	const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+// 	if(!isValidOperation) {
+// 		return res.status(400).send({error: "Invalid updates!"})
+// 	}
+
+// 	try {
+
+// 		const user = await User.findById(req.params.id)
+// 		console.log("user",user)
+
+// 		updates.forEach((update) => user[update] = req.body[update])
+
+// 		await user.save()
+// 		// const user = await User.findByIdAndUpdate(_id, body, { new: true, runValidators: true })
+		
+// 		if(!user){
+// 			return res.status(404).send()
+// 		}
+
+// 		res.send(user)
+
+// 	} catch (e) {
+// 		res.status(400)
+// 	}
+// })
+
+//update login profile
+router.patch("/users/me", auth, async (req, res) => {
 	const updates = Object.keys(req.body)
-	console.log("updates", updates)
 	const allowedUpdates = ['name', 'email', 'password', 'age']
-	console.log("allwoowdd", allowedUpdates)
 	const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
-
+	
 	if(!isValidOperation) {
 		return res.status(400).send({error: "Invalid updates!"})
 	}
 
 	try {
-
-		const user = await User.findById(req.params.id)
-		console.log("user",user)
-
-		updates.forEach((update) => user[update] = req.body[update])
-
-		await user.save()
-		// const user = await User.findByIdAndUpdate(_id, body, { new: true, runValidators: true })
-		
-		if(!user){
-			return res.status(404).send()
-		}
-
-		res.send(user)
+		updates.forEach((update) => req.user[update] = req.body[update])
+		await req.user.save()
+		res.send(req.user)
 
 	} catch (e) {
-		res.status(400)
+		res.status(400).send(e)
 	}
 })
 
 //Delete user
-router.delete("/users/:id", async(req, res) => {
-	const _id = req.params.id
+// router.delete("/users/:id", async(req, res) => {
+// 	const _id = req.params.id
 
+// 	try {
+// 		const user = await User.findByIdAndDelete(_id)
+
+// 		if(!user){
+// 			return res.status(404).send()
+// 		}
+
+// 		res.send(user)
+// 	} catch (e) {
+// 		res.status(404).send(e)
+// 	}
+// })
+
+//delete login profile
+router.delete("/users/me", auth, async (req, res) => {
 	try {
-		const user = await User.findByIdAndDelete(_id)
-
-		if(!user){
-			return res.status(404).send()
-		}
-
-		res.send(user)
+		await req.user.remove()
+		res.send(req.user)
 	} catch (e) {
 		res.status(404).send(e)
 	}
